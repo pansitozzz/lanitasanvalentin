@@ -10,41 +10,52 @@
 <style>
 :root{
   /* paleta romántica seria */
-  --bg1:#2b0f14;      /* vino oscuro */
-  --bg2:#7a1f2b;      /* rojo vino */
-  --paper:#fff6f2;    /* papel elegante */
-  --accent:#c9184a;   /* rojo romántico */
-  --accent2:#ff758f;  /* rosa suave */
-  --text:#2a1a1f;     /* texto sobrio */
+  --bg1:#2b0f14;
+  --bg2:#7a1f2b;
+  --paper:#fff6f2;
+  --accent:#c9184a;
+  --accent2:#ff758f;
+  --text:#2a1a1f;
 }
+
 *{box-sizing:border-box;}
+
 body{
   margin:0;
   font-family:Inter,sans-serif;
   background:radial-gradient(circle at top, #7a1f2b 0%, #2b0f14 60%, #140709 100%);
   overflow-x:hidden;
-  overflow-y:auto;
   color:var(--text);
 }
 
 /* ===== páginas ===== */
 .page{
-  position:absolute;
+  position:fixed; /* clave para transición */
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
   transition:.8s ease;
-  overflow:hidden;
 }
 
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(1.03);
+}
+
+/* ===== página 2 con scroll ===== */
 #page2{
   overflow-y:auto;
   overflow-x:hidden;
   -webkit-overflow-scrolling:touch;
-  display:block;
+  display:flex;
 }
-.hidden{opacity:0; pointer-events:none; transform:scale(1.03);}
+
+/* espacio para scroll */
+#page2 .letter{
+  margin:2rem 0;
+}
 
 /* ===== carta ===== */
 .letter{
@@ -54,7 +65,6 @@ body{
   padding:2rem 2.3rem;
   box-shadow:0 25px 70px rgba(0,0,0,.2);
   position:relative;
-  overflow:hidden;
   animation:openLetter 1s ease;
 }
 
@@ -80,11 +90,13 @@ body{
   color:var(--accent);
   margin:0;
 }
+
 .subtitle{
   font-family:Playfair Display, serif;
   opacity:.7;
   margin:.4rem 0 1.2rem;
 }
+
 .question{
   font-family:Playfair Display, serif;
   font-size:1.25rem;
@@ -92,31 +104,44 @@ body{
 }
 
 /* botones */
-.buttons{display:flex; gap:.8rem;}
+.buttons{
+  display:flex;
+  gap:.8rem;
+  flex-wrap:wrap;
+}
+
 button{
   padding:.7rem 1.6rem;
   border-radius:999px;
   border:none;
-  font-size:.95rem;
+  font-size:.9rem;
   cursor:pointer;
   transition:.25s ease;
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: .1px;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-family:'Poppins', sans-serif;
+  letter-spacing:.5px;
+  font-weight:500;
 }
-button:hover{transform:translateY(-2px);}
+
+button:hover{
+  transform:translateY(-2px);
+}
+
 #yesBtn{
   background:linear-gradient(135deg,var(--accent),var(--accent2));
   color:white;
   box-shadow:0 10px 30px rgba(255,45,85,.4);
 }
+
 #noBtn{
   background:white;
   color:var(--accent);
   border:2px solid var(--accent);
 }
-#noBtn.denied{animation:shake .4s;}
+
+#noBtn.denied{
+  animation:shake .4s;
+}
+
 @keyframes shake{
   0%,100%{transform:translateX(0);}
   25%{transform:translateX(-6px);}
@@ -127,21 +152,26 @@ button:hover{transform:translateY(-2px);}
 /* ===== corazones flotantes ===== */
 .heart{
   position:absolute;
-  width:12px;height:12px;
+  width:12px;
+  height:12px;
   background:var(--accent);
   transform:rotate(45deg);
   animation:float 10s linear infinite;
   opacity:.45;
 }
+
 .heart::before,.heart::after{
   content:"";
   position:absolute;
-  width:12px;height:12px;
+  width:12px;
+  height:12px;
   background:var(--accent);
   border-radius:50%;
 }
+
 .heart::before{top:-6px;}
 .heart::after{left:-6px;}
+
 @keyframes float{
   from{transform:translateY(110vh) rotate(45deg);}
   to{transform:translateY(-10vh) rotate(45deg);}
@@ -164,16 +194,23 @@ button:hover{transform:translateY(-2px);}
   transition:.35s ease;
   position:relative;
 }
-.polaroid:hover{transform:scale(1.05);}
+
+.polaroid:hover{
+  transform:scale(1.05);
+}
+
 .polaroid::before{
   content:"";
   position:absolute;
-  top:-12px; left:35%;
-  width:70px; height:18px;
+  top:-12px;
+  left:35%;
+  width:70px;
+  height:18px;
   background:rgba(255,200,210,.8);
   border-radius:4px;
   transform:rotate(-6deg);
 }
+
 .photo{
   width:100%;
   height:170px;
@@ -183,6 +220,7 @@ button:hover{transform:translateY(-2px);}
   margin-bottom:.6rem;
   filter:saturate(1.1) contrast(1.05);
 }
+
 .caption{
   font-family:'Dancing Script', cursive;
   text-align:center;
@@ -195,7 +233,7 @@ button:hover{transform:translateY(-2px);}
 .tilt-r{transform:rotate(5deg);}
 .tilt-s{transform:rotate(-2deg);}
 
-/* textos tipo subtítulo TikTok */
+/* textos tipo TikTok */
 .text-block{
   background:linear-gradient(135deg,#fff,#ffe6ef);
   padding:1rem 1.2rem;
@@ -203,6 +241,7 @@ button:hover{transform:translateY(-2px);}
   box-shadow:0 15px 35px rgba(0,0,0,.12);
   position:relative;
 }
+
 .text-block::after{
   content:"❤";
   position:absolute;
@@ -211,12 +250,14 @@ button:hover{transform:translateY(-2px);}
   color:var(--accent);
   opacity:.5;
 }
+
 .text-block h3{
   font-family:'Dancing Script', cursive;
   color:var(--accent);
   margin:.2rem 0 .4rem;
   font-size:1.6rem;
 }
+
 .text-block p{
   font-size:.95rem;
   line-height:1.5;
@@ -232,20 +273,35 @@ button:hover{transform:translateY(-2px);}
   color:var(--accent);
 }
 
-/* responsive */
-@media(max-width:600px){
-  .wall{grid-template-columns:1fr;}
-  .title{font-size:2.2rem;}
-  .photo{height:150px;}
-}
-
+/* ===== responsive móvil ===== */
 @media(max-width:768px){
   #page2{
     align-items:flex-start;
-    padding-top:1rem;
   }
+
   .letter{
     width:95vw;
+    padding:1.4rem 1.3rem;
+  }
+
+  .wall{
+    grid-template-columns:1fr;
+  }
+
+  .title{
+    font-size:2.2rem;
+  }
+
+  .photo{
+    height:150px;
+  }
+
+  .buttons{
+    flex-direction:column;
+  }
+
+  button{
+    width:100%;
   }
 }
 </style>
@@ -358,5 +414,6 @@ yesBtn.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
 
