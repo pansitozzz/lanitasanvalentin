@@ -22,7 +22,8 @@ body{
   margin:0;
   font-family:Inter,sans-serif;
   background:radial-gradient(circle at top, #7a1f2b 0%, #2b0f14 60%, #140709 100%);
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   color:var(--text);
 }
 
@@ -34,6 +35,14 @@ body{
   align-items:center;
   justify-content:center;
   transition:.8s ease;
+  overflow:hidden;
+}
+
+#page2{
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  display:block;
 }
 .hidden{opacity:0; pointer-events:none; transform:scale(1.03);}
 
@@ -229,6 +238,16 @@ button:hover{transform:translateY(-2px);}
   .title{font-size:2.2rem;}
   .photo{height:150px;}
 }
+
+@media(max-width:768px){
+  #page2{
+    align-items:flex-start;
+    padding-top:1rem;
+  }
+  .letter{
+    width:95vw;
+  }
+}
 </style>
 </head>
 <body>
@@ -339,4 +358,5 @@ yesBtn.addEventListener('click',()=>{
 
 </body>
 </html>
+
 
