@@ -1,419 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>💌</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💌 Próximamente...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  /* paleta romántica seria */
-  --bg1:#2b0f14;
-  --bg2:#7a1f2b;
-  --paper:#fff6f2;
-  --accent:#c9184a;
-  --accent2:#ff758f;
-  --text:#2a1a1f;
-}
+    <style>
+        :root {
+            --bg-dark: #0a0405;
+            --bg-gradient: radial-gradient(circle at center, #4a0e1a 0%, #1a070a 70%, #050203 100%);
+            --accent: #ff758f;
+            --elegant-white: #fff5f6;
+            --polaroid-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
 
-*{box-sizing:border-box;}
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg-dark);
+            background: var(--bg-gradient);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:radial-gradient(circle at top, #7a1f2b 0%, #2b0f14 60%, #140709 100%);
-  overflow-x:hidden;
-  color:var(--text);
-}
+        /* Overlay de grano para textura Y2K/Film */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.15;
+            z-index: 2;
+            pointer-events: none;
+        }
 
-/* ===== páginas ===== */
-.page{
-  position:fixed; /* clave para transición */
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:.8s ease;
-}
+        .maintenance-container {
+            text-align: center;
+            z-index: 100; /* Siempre encima */
+            padding: 3.5rem;
+            background: rgba(10, 4, 5, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 117, 143, 0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            max-width: 85vw;
+            transition: transform 0.3s ease;
+        }
 
-.hidden{
-  opacity:0;
-  pointer-events:none;
-  transform:scale(1.03);
-}
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2rem, 6vw, 3.8rem);
+            color: var(--accent);
+            margin: 0;
+            text-shadow: 0 0 20px rgba(255, 117, 143, 0.4);
+            letter-spacing: -1px;
+        }
 
-/* ===== página 2 con scroll ===== */
-#page2{
-  overflow-y:auto;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  display:flex;
-}
+        .sub-elegant {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--elegant-white);
+            opacity: 0.9;
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+            margin-top: 20px;
+            letter-spacing: 2px;
+            display: block;
+            position: relative;
+            padding-top: 15px;
+        }
 
-/* espacio para scroll */
-#page2 .letter{
-  margin:2rem 0;
-}
+        .sub-elegant::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 25%;
+            right: 25%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
 
-/* ===== carta ===== */
-.letter{
-  width:min(950px,92vw);
-  background:rgba(255,246,242,.96);
-  border-radius:20px;
-  padding:2rem 2.3rem;
-  box-shadow:0 25px 70px rgba(0,0,0,.2);
-  position:relative;
-  animation:openLetter 1s ease;
-}
+        /* Sistema de fotos aleatorias */
+        .floating-photo {
+            position: absolute;
+            bottom: -300px;
+            background: #fff;
+            padding: 8px 8px 22px 8px;
+            box-shadow: var(--polaroid-shadow);
+            border-radius: 3px;
+            z-index: 1;
+            will-change: transform, opacity;
+            transition: filter 0.5s ease;
+        }
 
-.letter::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at top left, rgba(255,45,85,.06), transparent 40%),
-    radial-gradient(circle at bottom right, rgba(0,242,234,.05), transparent 40%);
-  pointer-events:none;
-}
+        .floating-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: contrast(1.1) saturate(1.1);
+        }
 
-@keyframes openLetter{
-  from{transform:scale(.9) rotateX(10deg); opacity:0;}
-  to{transform:scale(1); opacity:1;}
-}
+        .heart {
+            position: absolute;
+            color: var(--accent);
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* títulos */
-.title{
-  font-family:'Dancing Script', cursive;
-  font-size:2.7rem;
-  color:var(--accent);
-  margin:0;
-}
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) rotate(var(--rot-start)) scale(var(--size)); 
+                opacity: 0; 
+            }
+            10% { opacity: var(--max-op); }
+            90% { opacity: var(--max-op); }
+            100% { 
+                transform: translateY(-140vh) rotate(var(--rot-end)) scale(var(--size)); 
+                opacity: 0; 
+            }
+        }
 
-.subtitle{
-  font-family:Playfair Display, serif;
-  opacity:.7;
-  margin:.4rem 0 1.2rem;
-}
-
-.question{
-  font-family:Playfair Display, serif;
-  font-size:1.25rem;
-  margin:1rem 0 1.4rem;
-}
-
-/* botones */
-.buttons{
-  display:flex;
-  gap:.8rem;
-  flex-wrap:wrap;
-}
-
-button{
-  padding:.7rem 1.6rem;
-  border-radius:999px;
-  border:none;
-  font-size:.9rem;
-  cursor:pointer;
-  transition:.25s ease;
-  font-family:'Poppins', sans-serif;
-  letter-spacing:.5px;
-  font-weight:500;
-}
-
-button:hover{
-  transform:translateY(-2px);
-}
-
-#yesBtn{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:white;
-  box-shadow:0 10px 30px rgba(255,45,85,.4);
-}
-
-#noBtn{
-  background:white;
-  color:var(--accent);
-  border:2px solid var(--accent);
-}
-
-#noBtn.denied{
-  animation:shake .4s;
-}
-
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  25%{transform:translateX(-6px);}
-  50%{transform:translateX(6px);}
-  75%{transform:translateX(-3px);}
-}
-
-/* ===== corazones flotantes ===== */
-.heart{
-  position:absolute;
-  width:12px;
-  height:12px;
-  background:var(--accent);
-  transform:rotate(45deg);
-  animation:float 10s linear infinite;
-  opacity:.45;
-}
-
-.heart::before,.heart::after{
-  content:"";
-  position:absolute;
-  width:12px;
-  height:12px;
-  background:var(--accent);
-  border-radius:50%;
-}
-
-.heart::before{top:-6px;}
-.heart::after{left:-6px;}
-
-@keyframes float{
-  from{transform:translateY(110vh) rotate(45deg);}
-  to{transform:translateY(-10vh) rotate(45deg);}
-}
-
-/* ===== collage TikTok aesthetic ===== */
-.wall{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:1.3rem;
-  margin-top:1rem;
-}
-
-/* polaroids */
-.polaroid{
-  background:white;
-  padding:.6rem .6rem 1.2rem;
-  border-radius:14px;
-  box-shadow:0 20px 50px rgba(0,0,0,.25);
-  transition:.35s ease;
-  position:relative;
-}
-
-.polaroid:hover{
-  transform:scale(1.05);
-}
-
-.polaroid::before{
-  content:"";
-  position:absolute;
-  top:-12px;
-  left:35%;
-  width:70px;
-  height:18px;
-  background:rgba(255,200,210,.8);
-  border-radius:4px;
-  transform:rotate(-6deg);
-}
-
-.photo{
-  width:100%;
-  height:170px;
-  border-radius:12px;
-  background-size:cover;
-  background-position:center;
-  margin-bottom:.6rem;
-  filter:saturate(1.1) contrast(1.05);
-}
-
-.caption{
-  font-family:'Dancing Script', cursive;
-  text-align:center;
-  font-size:1.35rem;
-  color:var(--accent);
-}
-
-/* inclinación */
-.tilt-l{transform:rotate(-5deg);}
-.tilt-r{transform:rotate(5deg);}
-.tilt-s{transform:rotate(-2deg);}
-
-/* textos tipo TikTok */
-.text-block{
-  background:linear-gradient(135deg,#fff,#ffe6ef);
-  padding:1rem 1.2rem;
-  border-radius:16px;
-  box-shadow:0 15px 35px rgba(0,0,0,.12);
-  position:relative;
-}
-
-.text-block::after{
-  content:"❤";
-  position:absolute;
-  right:12px;
-  bottom:10px;
-  color:var(--accent);
-  opacity:.5;
-}
-
-.text-block h3{
-  font-family:'Dancing Script', cursive;
-  color:var(--accent);
-  margin:.2rem 0 .4rem;
-  font-size:1.6rem;
-}
-
-.text-block p{
-  font-size:.95rem;
-  line-height:1.5;
-  opacity:.85;
-}
-
-/* firma */
-.signature{
-  text-align:center;
-  margin-top:1.6rem;
-  font-family:'Dancing Script', cursive;
-  font-size:2.1rem;
-  color:var(--accent);
-}
-
-/* ===== responsive móvil ===== */
-@media(max-width:768px){
-  #page2{
-    align-items:flex-start;
-  }
-
-  .letter{
-    width:95vw;
-    padding:1.4rem 1.3rem;
-  }
-
-  .wall{
-    grid-template-columns:1fr;
-  }
-
-  .title{
-    font-size:2.2rem;
-  }
-
-  .photo{
-    height:150px;
-  }
-
-  .buttons{
-    flex-direction:column;
-  }
-
-  button{
-    width:100%;
-  }
-}
-</style>
+        @media (max-width: 600px) {
+            .maintenance-container { padding: 2rem; border-radius: 30px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
 </head>
 <body>
 
-<script>
-for(let i=0;i<32;i++){
-  const h=document.createElement('div');
-  h.className='heart';
-  h.style.left=Math.random()*100+'vw';
-  h.style.animationDelay=Math.random()*10+'s';
-  h.style.opacity=Math.random();
-  document.body.appendChild(h);
-}
-</script>
-
-<!-- Página 1 -->
-<div id="page1" class="page">
-  <div class="letter">
-    <h1 class="title">Oa, nana 💌</h1>
-    <p class="subtitle">¿Ya vez que sí soy un romántico?</p>
-    <p class="question">¿Quieres ser mi San Valentín?</p>
-    <div class="buttons">
-      <button id="yesBtn">Sí, amor, tú mandas te amo mucho 🥺</button>
-      <button id="noBtn">No ctmr</button>
-    </div>
-  </div>
-</div>
-
-<!-- Página 2 -->
-<div id="page2" class="page hidden">
-  <div class="letter">
-    <h1 class="title">Un poquito de nosotros ❤️‍🩹</h1>
-    <p class="subtitle">Algunas de nuestras fotos más destacables para romantizar.</p>
-
-    <div class="wall">
-
-      <!-- FOTO 1 -->
-      <div class="polaroid tilt-l">
-        <div class="photo" style="background-image:url('od.jpeg');"></div>
-        <span class="caption">Donde todo empezó JAJAJA 💌</span>
-      </div>
-
-      <div class="text-block">
-        <h3>Primer momento</h3>
-        <p>Sabes que nada de esto estuvo en mente, nunca nos conocimos lo suficiente como para saber que todo esto iba a ser así y eres lo mejor que me está pasando.</p>
-      </div>
-
-      <!-- FOTO 2 -->
-      <div class="polaroid tilt-r">
-        <div class="photo" style="background-image:url('oj.JPEG');"></div>
-        <span class="caption">Primeros momentos en donde todo empezó a cambiar.❤️‍🩹</span>
-      </div>
-
-      <div class="text-block">
-        <h3>Enamorado de tí</h3>
-        <p>Te amo tanto que estoy enamorado de cada cosita de ti, cada día me enamoro más de ti.</p>
-      </div>
-
-      <!-- FOTO 3 -->
-      <div class="polaroid tilt-s">
-        <div class="photo" style="background-image:url('of.jpg');"></div>
-        <span class="caption">Detalles que nunca te faltarán.</span>
-      </div>
-
-      <div class="text-block">
-        <h3>De un momento a otro</h3>
-        <p>Todo empezó a cambiar y te empecé a ver como alguien que quiero para toda mi vida.</p>
-      </div>
-
-      <!-- FOTO 4 -->
-      <div class="polaroid tilt-r">
-        <div class="photo" style="background-image:url('os.JPEG');"></div>
-        <span class="caption">Momentos que siempre son mejores contigo.</span>
-      </div>
-
-      <div class="text-block">
-        <h3>Actualmente</h3>
-        <p>No estoy seguro de cómo serán las cosas más adelante, pero solo quiero quedarme contigo.</p>
-      </div>
-
+    <div class="maintenance-container">
+        <h1>Inactiva hasta el 14 de febrero...</h1>
+        <span class="sub-elegant">o hasta que regreses de Piura. ❤️‍🩹</span>
     </div>
 
-    <div class="signature">— de Frank para Luana 💘</div>
-  </div>
-</div>
+    <script>
+        const photos = ['mc.JPEG', 'som.JPEG', 'op.JPEG', 'ol.JPEG', 'did.JPEG', 'oj.JPEG', 'of.jpg', 'os.JPEG'];
+        
+        // Función para obtener número aleatorio en un rango
+        const randomRange = (min, max) => Math.random() * (max - min) + min;
 
-<script>
-const yesBtn=document.getElementById('yesBtn');
-const noBtn=document.getElementById('noBtn');
-const page1=document.getElementById('page1');
-const page2=document.getElementById('page2');
+        function createFloatingElement() {
+            const isPhoto = Math.random() > 0.2; 
+            const el = document.createElement('div');
+            
+            // Configuración de aleatoriedad avanzada
+            const size = isPhoto ? randomRange(0.6, 1.2) : randomRange(0.5, 1.5);
+            const duration = randomRange(15, 25);
+            const startRot = randomRange(-25, 25);
+            const endRot = randomRange(-10, 10) + (startRot > 0 ? 40 : -40);
+            const maxOp = isPhoto ? randomRange(0.4, 0.8) : randomRange(0.2, 0.5);
+            const zIndex = Math.floor(size * 10); // Fotos más grandes se ven "más cerca"
+            const blurVal = size < 0.8 ? (0.8 - size) * 5 : 0; // Efecto de profundidad
 
-noBtn.addEventListener('mouseenter',()=>{
-  const x=(Math.random()*200-100);
-  const y=(Math.random()*120-60);
-  noBtn.style.transform=`translate(${x}px,${y}px)`;
-});
-noBtn.addEventListener('click',()=>{
-  noBtn.classList.add('denied');
-  setTimeout(()=>noBtn.classList.remove('denied'),400);
-});
+            el.className = isPhoto ? 'floating-photo' : 'heart';
+            el.style.setProperty('--size', size);
+            el.style.setProperty('--rot-start', `${startRot}deg`);
+            el.style.setProperty('--rot-end', `${endRot}deg`);
+            el.style.setProperty('--max-op', maxOp);
+            el.style.zIndex = zIndex;
+            el.style.filter = `blur(${blurVal}px)`;
+            
+            if (isPhoto) {
+                const img = document.createElement('img');
+                img.src = photos[Math.floor(Math.random() * photos.length)];
+                el.style.width = '120px';
+                el.style.height = '150px';
+                el.appendChild(img);
+            } else {
+                el.innerHTML = '❤';
+                el.style.fontSize = '20px';
+            }
 
-yesBtn.addEventListener('click',()=>{
-  page1.classList.add('hidden');
-  setTimeout(()=>page2.classList.remove('hidden'),500);
-});
-</script>
+            el.style.left = randomRange(0, 95) + 'vw';
+            el.style.animation = `floatUp ${duration}s linear forwards`;
 
+            document.body.appendChild(el);
+
+            // Limpieza de memoria
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+
+        // Generación inicial distribuida
+        for(let i=0; i<12; i++) {
+            setTimeout(createFloatingElement, randomRange(0, 5000));
+        }
+
+        // Bucle continuo
+        setInterval(createFloatingElement, 2000);
+    </script>
 </body>
 </html>
-
-
-
