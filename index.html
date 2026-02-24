@@ -1,200 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💌</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌</title>
 
-    <style>
-        :root {
-            --bg-dark: #0a0405;
-            --bg-gradient: radial-gradient(circle at center, #4a0e1a 0%, #1a070a 70%, #050203 100%);
-            --accent: #ff758f;
-            --elegant-white: #fff5f6;
-            --polaroid-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: var(--bg-dark);
-            background: var(--bg-gradient);
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+<style>
+:root{
+  --bg1:#2b0f14;
+  --bg2:#4a0e1a;
+  --accent:#ff7a92;
+  --paper:#fff6f4;
+}
 
-        /* Overlay de grano para textura Y2K/Film */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-            opacity: 0.15;
-            z-index: 2;
-            pointer-events: none;
-        }
+*{box-sizing:border-box}
 
-        .maintenance-container {
-            text-align: center;
-            z-index: 100; /* Siempre encima */
-            padding: 3.5rem;
-            background: rgba(10, 4, 5, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 50px;
-            border: 1px solid rgba(255, 117, 143, 0.2);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
-            max-width: 85vw;
-            transition: transform 0.3s ease;
-        }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:'Inter',sans-serif;
+  background:
+    radial-gradient(circle at top,rgba(255,120,150,.08),transparent 40%),
+    repeating-radial-gradient(circle at 20% 30%,rgba(255,120,150,.06) 0 2px,transparent 2px 40px),
+    linear-gradient(180deg,var(--bg2),#140609);
+  color:var(--paper);
+}
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2rem, 6vw, 3.8rem);
-            color: var(--accent);
-            margin: 0;
-            text-shadow: 0 0 20px rgba(255, 117, 143, 0.4);
-            letter-spacing: -1px;
-        }
+/* corazones de fondo */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(255,120,150,.12) 2px,transparent 3px),
+    radial-gradient(circle at 80% 30%,rgba(255,120,150,.08) 2px,transparent 3px),
+    radial-gradient(circle at 50% 80%,rgba(255,120,150,.1) 2px,transparent 3px);
+  background-size:120px 120px;
+  pointer-events:none;
+  opacity:.6;
+}
 
-        .sub-elegant {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 600;
-            color: var(--elegant-white);
-            opacity: 0.9;
-            font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-            margin-top: 20px;
-            letter-spacing: 2px;
-            display: block;
-            position: relative;
-            padding-top: 15px;
-        }
+/* header */
+header{
+  max-width:1100px;
+  margin:auto;
+  padding:4rem 2rem 2rem;
+}
 
-        .sub-elegant::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 25%;
-            right: 25%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        }
+header h1{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(2rem,4vw,3rem);
+  margin:0;
+}
 
-        /* Sistema de fotos aleatorias */
-        .floating-photo {
-            position: absolute;
-            bottom: -300px;
-            background: #fff;
-            padding: 8px 8px 22px 8px;
-            box-shadow: var(--polaroid-shadow);
-            border-radius: 3px;
-            z-index: 1;
-            will-change: transform, opacity;
-            transition: filter 0.5s ease;
-        }
+header p{
+  opacity:.8;
+  margin-top:.6rem;
+  font-size:1rem;
+}
 
-        .floating-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: contrast(1.1) saturate(1.1);
-        }
+/* grid */
+.gallery{
+  max-width:1100px;
+  margin:auto;
+  padding:2rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:2rem;
+}
 
-        .heart {
-            position: absolute;
-            color: var(--accent);
-            z-index: 0;
-            pointer-events: none;
-        }
+/* card */
+.card{
+  position:relative;
+  border-radius:22px;
+  overflow:hidden;
+  background:rgba(255,255,255,.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 30px 60px rgba(0,0,0,.6);
+  transform:translateY(40px);
+  opacity:0;
+  animation:enter .9s ease forwards;
+}
 
-        @keyframes floatUp {
-            0% { 
-                transform: translateY(0) rotate(var(--rot-start)) scale(var(--size)); 
-                opacity: 0; 
-            }
-            10% { opacity: var(--max-op); }
-            90% { opacity: var(--max-op); }
-            100% { 
-                transform: translateY(-140vh) rotate(var(--rot-end)) scale(var(--size)); 
-                opacity: 0; 
-            }
-        }
+.card:nth-child(odd){animation-delay:.1s}
+.card:nth-child(even){animation-delay:.2s}
 
-        @media (max-width: 600px) {
-            .maintenance-container { padding: 2rem; border-radius: 30px; }
-            h1 { font-size: 2.2rem; }
-        }
-    </style>
+@keyframes enter{
+  to{opacity:1;transform:none}
+}
+
+.card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  filter:contrast(1.08) saturate(1.08) brightness(.95);
+  transition:transform .8s ease,filter .8s ease;
+}
+
+.card:hover img{
+  transform:scale(1.05) rotate(-.4deg);
+  filter:contrast(1.15) saturate(1.15);
+}
+
+/* overlay */
+.overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.65));
+}
+
+/* text */
+.text{
+  position:absolute;
+  bottom:0;
+  padding:1.4rem;
+}
+
+.text h3{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:1.25rem;
+  margin:0 0 .3rem;
+}
+
+.text span{
+  font-size:.9rem;
+  opacity:.85;
+}
+
+/* footer */
+footer{
+  text-align:center;
+  padding:3rem 1rem 4rem;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  opacity:.85;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="maintenance-container">
-        <h1>Inactiva hasta el 14 de febrero...</h1>
-        <span class="sub-elegant">o hasta que regreses de Piura. ❤️‍🩹</span>
+<header>
+  <h1>Hola, por fin vas a voleeeer.</h1>
+  <p>Después de un tiempo vamos a vernooos. ❤️‍🩹 </p>
+</header>
+
+<section class="gallery">
+
+  <div class="card">
+    <img src="mc.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Te extrañé</h3>
+      <span>Más de lo que digo.</span>
     </div>
+  </div>
 
-    <script>
-        const photos = ['mc.JPEG', 'som.JPEG', 'op.JPEG', 'did.JPEG', 'oj.JPEG', 'of.jpg', 'os.JPEG'];
-        
-        // Función para obtener número aleatorio en un rango
-        const randomRange = (min, max) => Math.random() * (max - min) + min;
+  <div class="card">
+    <img src="did.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>La espera</h3>
+      <span>Valió totalmente la pena.</span>
+    </div>
+  </div>
 
-        function createFloatingElement() {
-            const isPhoto = Math.random() > 0.2; 
-            const el = document.createElement('div');
-            
-            // Configuración de aleatoriedad avanzada
-            const size = isPhoto ? randomRange(0.6, 1.2) : randomRange(0.5, 1.5);
-            const duration = randomRange(15, 25);
-            const startRot = randomRange(-25, 25);
-            const endRot = randomRange(-10, 10) + (startRot > 0 ? 40 : -40);
-            const maxOp = isPhoto ? randomRange(0.4, 0.8) : randomRange(0.2, 0.5);
-            const zIndex = Math.floor(size * 10); // Fotos más grandes se ven "más cerca"
-            const blurVal = size < 0.8 ? (0.8 - size) * 5 : 0; // Efecto de profundidad
+  <div class="card">
+    <img src="som.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Salir juntos</h3>
+      <span>Caminar, hablar y comer brostercito.</span>
+    </div>
+  </div>
 
-            el.className = isPhoto ? 'floating-photo' : 'heart';
-            el.style.setProperty('--size', size);
-            el.style.setProperty('--rot-start', `${startRot}deg`);
-            el.style.setProperty('--rot-end', `${endRot}deg`);
-            el.style.setProperty('--max-op', maxOp);
-            el.style.zIndex = zIndex;
-            el.style.filter = `blur(${blurVal}px)`;
-            
-            if (isPhoto) {
-                const img = document.createElement('img');
-                img.src = photos[Math.floor(Math.random() * photos.length)];
-                el.style.width = '120px';
-                el.style.height = '150px';
-                el.appendChild(img);
-            } else {
-                el.innerHTML = '❤';
-                el.style.fontSize = '20px';
-            }
+  <div class="card">
+    <img src="po.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Lo nuestro</h3>
+      <span>En cosas pequeñas.</span>
+    </div>
+  </div>
 
-            el.style.left = randomRange(0, 95) + 'vw';
-            el.style.animation = `floatUp ${duration}s linear forwards`;
+  <div class="card">
+    <img src="of.jpg">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Detalles</h3>
+      <span>Son muchos más de lo que puedes esperar.</span>
+    </div>
+  </div>
 
-            document.body.appendChild(el);
+  <div class="card">
+    <img src="oj.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Momentos</h3>
+      <span>Que ya son nuestros.</span>
+    </div>
+  </div>
 
-            // Limpieza de memoria
-            setTimeout(() => el.remove(), duration * 1000);
-        }
+  <div class="card">
+    <img src="op.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Volver</h3>
+      <span>Y tener citas bonitas.</span>
+    </div>
+  </div>
 
-        // Generación inicial distribuida
-        for(let i=0; i<12; i++) {
-            setTimeout(createFloatingElement, randomRange(0, 5000));
-        }
+  <div class="card">
+    <img src="os.JPEG">
+    <div class="overlay"></div>
+    <div class="text">
+      <h3>Nosotros</h3>
+      <span>Donde siempre nos gusta estar.</span>
+    </div>
+  </div>
 
-        // Bucle continuo
-        setInterval(createFloatingElement, 2000);
-    </script>
+</section>
+
+<footer>
+  Te amo muchito, besos.😘
+</footer>
+
 </body>
 </html>
